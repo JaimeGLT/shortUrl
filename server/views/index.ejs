@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.788);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            display: flex;
+            padding: 10px;
+            color: rgb(16, 146, 33);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .table-container thead{
+
+            background-color: rgb(8, 185, 46);
+            border-color: black;
+        }
+
+        .table-container tbody {
+            background-color: rgba(0, 0, 0, 0.089);
+            color: white;
+            list-style: none;
+        }
+
+        .table-container tbody a {
+            color: white;
+            text-decoration: none;
+            padding: 5px;
+            display: block; /* Asegura que el enlace ocupe todo el ancho de la celda */
+            overflow-x: auto; /* Permite el desplazamiento horizontal dentro del enlace */
+            white-space: nowrap; /* Evita que el contenido se ajuste a una nueva línea */
+        }
+
+        .table-container tbody a:hover {
+            color: rgb(163, 32, 180);
+            text-decoration: underline;
+        }
+
+        .table-container tbody td {
+            height: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            max-width: 100px;
+        }
+        
+        .table-container {
+            border: black;
+            min-width: 300px;
+            width: 100%;
+            max-width: 600px;
+
+        }
+
+        input {
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            color: black;
+            width: 100%;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 50px;
+        }
+
+        .container {
+            min-width: 300px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        form button {
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            margin-left: 2px;
+            height: 30px;
+            border: 3px solid rgb(7, 150, 155);
+            background-color: rgb(5, 176, 182);
+        }
+
+        form button:hover {
+            font-weight: 700;
+            cursor: pointer;
+            background-color: aqua;
+            border: 3px solid aqua;
+            color: rgb(0, 0, 0);
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <form action="/shortUrl" method="post">
+            <input type="url" name="fullUrl" id="fullUrl" placeholder="Url">
+            <button type="submit">Convertir</button>
+        </form>
+    
+        <table class="table-container">
+            <thead>
+                <tr>
+                    <th>Url completa</th>
+                    <th>Url corta</th>
+                    <th>Clicks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% urls.forEach(shortUrl => { %>
+                    <tr>
+                        <td><a href="<%= shortUrl.url %>"><%= shortUrl.url %></a></td>
+                        <td><a href="/<%= shortUrl.shortId %>"><%= shortUrl.shortId %></a></td>
+                        <td><%= shortUrl.clicks %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
